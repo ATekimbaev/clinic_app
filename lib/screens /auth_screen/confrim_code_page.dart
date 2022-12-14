@@ -115,8 +115,9 @@ class _ConfirmCodeScreenState extends State<ConfirmCodeScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => CreateProfileScreen()));
-                    } else
+                    } else {
                       widget.errorText = 'Неверный код';
+                    }
                     setState(() {});
                   },
                 ),

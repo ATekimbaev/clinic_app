@@ -1,10 +1,9 @@
 import 'package:clinic_app/core/widgets/app_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
+import '../home_screens/bottom_navigation.dart';
 
 class CreateProfileScreen extends StatelessWidget {
   CreateProfileScreen({super.key});
@@ -51,7 +50,19 @@ class CreateProfileScreen extends StatelessWidget {
             const SizedBox(
               height: 150,
             ),
-            Center(child: AppButton(title: 'Далее', onPressed: () {}))
+            Center(
+              child: AppButton(
+                title: 'Далее',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BottomNavBar(),
+                    ),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),

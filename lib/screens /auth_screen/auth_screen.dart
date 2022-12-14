@@ -6,8 +6,6 @@ import 'package:clinic_app/core/widgets/app_button.dart';
 import 'package:clinic_app/screens%20/auth_screen/confrim_code_page.dart';
 import 'package:clinic_app/screens%20/auth_screen/widget/custom_text_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -91,8 +89,9 @@ class _AuthScreenState extends State<AuthScreen> {
                           ),
                         ),
                       );
-                    } else
+                    } else {
                       errorText = 'Некорректный номер';
+                    }
                     setState(() {});
                   },
                 ),
