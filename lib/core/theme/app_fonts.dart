@@ -20,4 +20,10 @@ abstract class AppFonts {
       fontSize: 10, fontWeight: FontWeight.w500, color: AppColors.black);
   static const w500s40 = TextStyle(
       fontSize: 40, fontWeight: FontWeight.w500, color: AppColors.black);
+  static const w400s18 = TextStyle(
+      fontSize: 18, fontWeight: FontWeight.w400, color: AppColors.black);
+  static const w500s15 = TextStyle(
+      fontSize: 15, fontWeight: FontWeight.w500, color: AppColors.black);
+  static const w300s15 = TextStyle(
+      fontSize: 15, fontWeight: FontWeight.w300, color: AppColors.black);
 }

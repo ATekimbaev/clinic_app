@@ -1,11 +1,33 @@
+import 'dart:io';
+
 import 'package:clinic_app/core/theme/app_colors.dart';
 import 'package:clinic_app/core/theme/app_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+import 'package:image_picker/image_picker.dart';
+
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({
+    super.key,
+  });
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  File? _image;
+
+  int _selctedIndex = 0;
+
+  Future _pickImage(ImageSource source) async {
+    final image = await ImagePicker().pickImage(source: source);
+    if (image == null) return;
+    File? img = File(image.path);
+    setState(() {
+      _image = img;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,27 +59,76 @@ class ProfileScreen extends StatelessWidget {
                 CircleAvatar(
                   backgroundColor: AppColors.lightBlue,
                   radius: 50,
-                  child: Text(
-                    'AA',
-                    style: AppFonts.w500s40.copyWith(color: AppColors.white),
-                  ),
+                  child: _image == null
+                      ? const Text('AA')
+                      : CircleAvatar(
+                          radius: 50,
+                          backgroundImage: FileImage(
+                            _image!,
+                          ),
+                        ),
                 ),
-                const Positioned(
+                Positioned(
                   right: 0,
                   bottom: 0,
-                  child: CircleAvatar(
-                    radius: 16,
-                    child: Icon(
-                      Icons.camera_alt,
-                      size: 16,
+                  child: InkWell(
+                    onTap: () {
+                      _pickImage(ImageSource.camera);
+                    },
+                    child: const CircleAvatar(
+                      radius: 16,
+                      child: Icon(
+                        Icons.camera_alt,
+                        size: 16,
+                      ),
                     ),
                   ),
-                )
+                ),
               ],
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            const Text(
+              'Айзан Алишерова',
+              style: AppFonts.w500s22,
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const Text(
+              '+996 555 78 65 65',
+              style: AppFonts.w400s18,
+            ),
+            DefaultTabController(
+              initialIndex: 0,
+              length: 3,
+              child: TabBar(
+                labelStyle: AppFonts.w500s15,
+                tabs: const [
+                  Tab(
+                    icon: Icon(Icons.directions_car),
+                  ),
+                  Tab(
+                    icon: Icon(Icons.directions_car),
+                  ),
+                  Tab(
+                    icon: Icon(Icons.directions_car),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void changeIndex(int index) {
+    if (_selctedIndex != index) {
+      _selctedIndex = index;
+
+      setState(() {});
+    }
   }
 }

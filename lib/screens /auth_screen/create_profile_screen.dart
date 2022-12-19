@@ -1,16 +1,18 @@
 import 'package:clinic_app/core/widgets/app_button.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_fonts.dart';
 import '../home_screens/bottom_navigation.dart';
 
 class CreateProfileScreen extends StatelessWidget {
-  CreateProfileScreen({super.key});
-  TextEditingController controllerName = TextEditingController();
-  TextEditingController controllerLastName = TextEditingController();
+  const CreateProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
+    TextEditingController controllerName = TextEditingController();
+    TextEditingController controllerLastName = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
@@ -53,11 +55,15 @@ class CreateProfileScreen extends StatelessWidget {
             Center(
               child: AppButton(
                 title: 'Далее',
-                onPressed: () {
+                onPressed: () async {
+                  final SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  prefs.setString('name', controllerName.text);
+                  prefs.setString('lastName', controllerLastName.text);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BottomNavBar(),
+                      builder: (context) => const BottomNavBar(),
                     ),
                   );
                 },
@@ -84,6 +90,7 @@ class NameTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       decoration: InputDecoration(
           enabledBorder: const UnderlineInputBorder(
             borderSide: BorderSide(color: AppColors.darkGrey),

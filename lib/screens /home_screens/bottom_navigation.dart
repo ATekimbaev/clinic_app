@@ -1,10 +1,12 @@
 import 'package:clinic_app/core/images/images.dart';
 import 'package:clinic_app/core/theme/app_colors.dart';
 import 'package:clinic_app/core/theme/app_fonts.dart';
+import 'package:clinic_app/screens%20/home_screens/screens/doctors_screen/doctors_screen.dart';
 import 'package:clinic_app/screens%20/home_screens/screens/profile_screen/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -13,11 +15,24 @@ class BottomNavBar extends StatefulWidget {
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
+// @override
+// void initState() {
+//   super.initState;
+//   initPrefs();
+// }
+
+// late SharedPreferences prefs;
+// void initPrefs() async {
+//   prefs = await SharedPreferences.getInstance();
+// }
+
 List<Widget> screens = [
-  ProfileScreen(),
+  DoctorsScreen(),
+  ProfileScreen(
+      // prefs: prefs,
+      ),
   Text('index 1'),
   Text('index 2'),
-  Text('index 3'),
 ];
 
 int _selctedIndex = 0;
